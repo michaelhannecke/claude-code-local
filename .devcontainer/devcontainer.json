@@ -1,0 +1,34 @@
+{
+  "name": "Claude Code Local Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+
+  "containerEnv": {
+    "ANTHROPIC_BASE_URL": "http://litellm:4000/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "sk-local-dev-key"
+  },
+
+  "runArgs": [
+    "--network=claude-local-network"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.vscode-typescript-next"
+      ]
+    }
+  },
+
+  "remoteUser": "vscode"
+}

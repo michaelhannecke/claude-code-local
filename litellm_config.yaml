@@ -1,0 +1,31 @@
+# LiteLLM Configuration for Claude Code with Local LLMs
+# Maps Claude model names to local Ollama models
+
+model_list:
+  # Map Sonnet to 14B model (for complex tasks)
+  - model_name: claude-3-5-sonnet-20241022
+    litellm_params:
+      model: ollama_chat/qwen2.5-coder:14b
+      api_base: http://host.docker.internal:11434
+      request_timeout: 600  # 10 min timeout for cold starts
+
+  # Map Haiku to 7B model (for lighter tasks)
+  - model_name: claude-3-5-haiku-20241022
+    litellm_params:
+      model: ollama_chat/qwen2.5-coder:7b
+      api_base: http://host.docker.internal:11434
+      request_timeout: 600
+
+  # Map Opus to largest available model
+  - model_name: claude-3-opus-20240229
+    litellm_params:
+      model: ollama_chat/qwen2.5-coder:14b
+      api_base: http://host.docker.internal:11434
+      request_timeout: 600
+
+litellm_settings:
+  drop_params: true  # Drop unsupported params instead of erroring
+  set_verbose: true  # Enable verbose logging for debugging
+
+general_settings:
+  master_key: sk-local-dev-key  # Change in production
